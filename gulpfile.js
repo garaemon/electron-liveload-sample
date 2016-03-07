@@ -3,12 +3,12 @@ var gulp = require('gulp');
 var electronServer = require('electron-connect').server;
 gulp.task('serve', function () {
   var electron = electronServer.create();
-  // Electronの起動
+  // Startup electron
   electron.start();
 
-  // BrowserProcess(MainProcess)が読み込むリソースが変更されたら, Electron自体を再起動
+  // Restart electron when resources of browser process are updated
   gulp.watch(['src/app.js', 'src/browser/**/*.js'], electron.restart);
 
-  // RendererProcessが読み込むリソースが変更されたら, RendererProcessにreloadさせる
+  // Reload render process when resources of render process are updated
   gulp.watch(['styles/**/*.css', 'src/renderer/**/*.{html,js}'], electron.reload);
 });
